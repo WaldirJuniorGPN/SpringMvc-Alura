@@ -28,6 +28,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var tokenJWT = recuperarToken(request);
 
         System.out.println(tokenJWT);
+
         if (tokenJWT != null) {
             var subject = tokenService.getSubject(tokenJWT);
             var usuario = repository.findByLogin(subject);
@@ -42,7 +43,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer", "");
+            return authorizationHeader.replace("Bearer ", "");
         }
 
         return null;
