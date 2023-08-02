@@ -6,6 +6,8 @@ public class ValidarHorarioFuncionamento implements validacao{
 
     @Override
     public void validar(DadosAgendamentoConsulta dados) {
-
+        if(dados.data() == null) {
+            return;
+        }
     }
 }
