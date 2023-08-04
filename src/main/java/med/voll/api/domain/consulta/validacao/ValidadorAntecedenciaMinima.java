@@ -5,7 +5,7 @@ import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 
 import java.time.LocalDateTime;
 
-public class ValidarAntecedenciaMinima implements Validacao {
+public class ValidadorAntecedenciaMinima implements Validacao {
 
     @Override
     public void validar(DadosAgendamentoConsulta dados) {
