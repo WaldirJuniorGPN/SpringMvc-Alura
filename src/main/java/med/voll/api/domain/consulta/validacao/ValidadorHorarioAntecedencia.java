@@ -2,10 +2,12 @@ package med.voll.api.domain.consulta.validacao;
 
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+@Component
 public class ValidadorHorarioAntecedencia implements Validacao{
 
     @Override
