@@ -34,5 +34,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
             """)
     Boolean findAtivoById(Long id);
 
-    boolean existsByMedicoIdAndData(Long idMedico, LocalDateTime data);
+
 }
