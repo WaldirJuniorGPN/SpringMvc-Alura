@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ValidadorMedicoAtivo implements Validacao {
 
-    @Autowired
     MedicoRepository medicoRepository;
 
     @Override
     public void validar(DadosAgendamentoConsulta dados) {
+
+        if (dados.idMedico() == null) {
+            return;
+        }
+
         var medico = medicoRepository.getReferenceById(dados.idMedico());
 
         if (!medico.getAtivo()) {
