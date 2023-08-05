@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ValidadorPacienteAtivo implements Validacao {
 
-    @Autowired
-    PacienteRepository pacienteRepository;
+    private PacienteRepository pacienteRepository;
 
     @Override
     public void validar(DadosAgendamentoConsulta dados) {
-        var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
+        var pacienteEstaAtivo = pacienteRepository.findAtivoById(dados.idPaciente());
 
-        if (!paciente.getAtivo()) {
+        if (!pacienteEstaAtivo) {
             throw new ValidacaoException("O ID do paciente não existe");
         }
     }
