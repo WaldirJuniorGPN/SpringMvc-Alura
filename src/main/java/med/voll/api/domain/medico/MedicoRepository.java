@@ -23,6 +23,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
                     AND c.data = :data
                 )
                 ORDER BY FUNCTION('RAND')
+                limit 1
             """)
     Medico escolherMedicoAleatorioLivreNaData(@Param("especialidade") Especialidade especialidade, @Param("data") LocalDateTime data);
 
