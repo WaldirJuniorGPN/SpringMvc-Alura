@@ -35,16 +35,35 @@ class MedicoRepositoryTest {
     @Test
     @DisplayName("Deveria devolver null quando o único médico cadastrado não está disponível na data")
     void escolherMedicoAleatorioLivreNaData() {
+       //given ou arrange
         var proximaSegundaAs10 = LocalDate.now()
                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
                 .atTime(10, 0);
+        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456", Especialidade.CARDIOLOGIA);
+        var paciente = cadastrarPaciente("Paciente", "paciente@gmail", "03708562100");
+        cadastrarConsulta(medico, paciente, proximaSegundaAs10);
 
-        var medico = cadastrarMedico(dadosMedico());
-        var paciente =
-        var consulta =
-
+        //when ou act
         var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA, proximaSegundaAs10);
+
+        //then ou assert
         assertThat(medicoLivre).isNull();
+    }
+
+    @Test
+    @DisplayName("Deveria devolver médico quando ele estiver disponível na data")
+    void escolherMedicoAleatorioLivreNaData2() {
+        //given ou arrange
+        var proximaSegundaAs10 = LocalDate.now()
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .atTime(10, 0);
+        var medico = cadastrarMedico("Medico", "medico@voll.med", "123456", Especialidade.CARDIOLOGIA);
+
+        //when ou act
+        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA, proximaSegundaAs10);
+
+        //then ou assert
+        assertThat(medicoLivre).isEqualTo(medico);
     }
 
     private void cadastrarConsulta(Medico medico, Paciente paciente, LocalDateTime data) {
